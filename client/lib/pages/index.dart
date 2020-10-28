@@ -25,14 +25,14 @@ class _IndexPageState extends State<IndexPage> {
       setState(() {
         _initialized = true;
       });
-    } catch(e) {
+    } catch (e) {
       // Set `_error` state to true if Firebase initialization fails
       setState(() {
         _error = true;
       });
     }
   }
-  
+
   @override
   void initState() {
     initializeFlutterFire();
@@ -41,8 +41,8 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   Widget build(BuildContext context) {
-      // Show error message if initialization failed
-    if(_error) {
+    // Show error message if initialization failed
+    if (_error) {
       return Text('Error loading FireStore');
     }
 
@@ -52,43 +52,39 @@ class _IndexPageState extends State<IndexPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('You have $_counter books'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.sync),
-            onPressed: (){},
-          )
-        ]
-      ),
+      appBar: AppBar(title: Text('You have $_counter books'), actions: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.sync),
+          onPressed: () {},
+        )
+      ]),
       floatingActionButton: AddRecordButton(),
       body: GetBooks(),
       drawer: Drawer(
-        child: Text('HELLOWROLD') // Populate the Drawer in the next step.
-      ),
+          child: Text('HELLOWROLD') // Populate the Drawer in the next step.
+          ),
     );
   }
 }
 
-class AddRecordButton extends StatelessWidget{
+class AddRecordButton extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: (){ 
+      onPressed: () {
         showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return Container(
-                height: 400,
-                color: Colors.amber,
-                child: AddBookForm(),
-              );
-            },
-          );
+          context: context,
+          builder: (BuildContext context) {
+            return Container(
+              height: 400,
+              color: Colors.amber,
+              child: AddBookForm(),
+            );
+          },
+        );
       },
       tooltip: 'Add Book',
       child: Icon(Icons.add),
     );
   }
 }
-
