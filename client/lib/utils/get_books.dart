@@ -10,7 +10,6 @@ class GetBooks extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
       stream: books.snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-      
         if (snapshot.hasError) {
           return Text("Something went wrong");
         }
@@ -22,23 +21,21 @@ class GetBooks extends StatelessWidget {
         return new ListView(
           children: snapshot.data.docs.map((DocumentSnapshot document) {
             return new ListTile(
-              title: new Text(document.data()['title']),
-              // Within the `FirstScreen` widget
-              onTap: () {
-                // Navigate to the show page using a named route.
-                Navigator.pushNamed(
-                  context, 
-                  '/show',
-                  // arguments: new Text(document.data()['title']),
-                  arguments: ScreenArguments(
-                    document.data()['title'],
-                  ),
-                );
-              }
-            );
+                title: new Text(document.data()['title']),
+                // Within the `FirstScreen` widget
+                onTap: () {
+                  // Navigate to the show page using a named route.
+                  Navigator.pushNamed(
+                    context,
+                    '/show',
+                    // arguments: new Text(document.data()['title']),
+                    arguments: ScreenArguments(
+                      document.data()['title'],
+                    ),
+                  );
+                });
           }).toList(),
         );
-
       },
     );
   }
